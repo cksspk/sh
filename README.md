@@ -52,26 +52,44 @@ yum install nginx
 systemctl start nginx
 ```
 
-修改配置
+修改配置文件
 
-```ß
- #1. 修改顶部user 为root
+```
+vim /etc/nginx/nginx.conf
+```
+
+```
+#1. 修改顶部user 为root
 user root;
+```
 
-#2. 修改server配置
+增加blog 代理
+
+```sh
+touch /etc/nginx/conf.d/blog.conf
+```
+
+```sh
+cat > /etc/nginx/conf.d/blog.conf <<-EOF
 server {
-		listen       80;
-	    server_name  localhost;
-        location / {
-    		 #地址修改为项目git仓库地址
-             root   /home/git/projects/blog;
-             index  index.html index.htm;
-         }
- 
-         error_page   500 502 503 504  /50x.html;
-         location = /50x.html {
-             root   html;
-         }
-      }
+    listen	80;
+    server_name	34.150.97.109;
+    location / {
+        #地址修改为项目git仓库地址
+        root   /home/git/projects/blog;
+        index  index.html index.htm;
+    }
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+}
+EOF
+```
+
+Nginx 403 问题
+
+```
+关闭Linux	SELinux
 ```
 
