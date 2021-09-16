@@ -16,7 +16,7 @@ login_flag=n
 
 # 新建git用户
 add_user(){
-    read -p "请输入新的名:" user_name
+    read -p "请输入新的用户名:" user_name
     # 添加用户
     useradd $user_name
     if [ $? -eq 0 ];then
@@ -40,7 +40,7 @@ add_user(){
     mkdir -p /home/${user_name}/projects/blog  
     mkdir -p /home/${user_name}/repos
     git init --bare /home/${user_name}/repos/blog.git
-    touch /home/${user_name}/repos/blog.git/post-receive
+    touch /home/${user_name}/repos/blog.git/hooks/post-receive
 
     cat > /home/${user_name}/repos/blog.git/post-receive <<-EOF
 #!/bin/sh
