@@ -42,15 +42,15 @@ add_user(){
     git init --bare /home/${user_name}/repos/blog.git
     touch /home/${user_name}/repos/blog.git/hooks/post-receive
 
-    cat > /home/${user_name}/repos/blog.git/post-receive <<-EOF
+    cat > /home/${user_name}/repos/blog.git/hooks/post-receive <<-EOF
 #!/bin/sh
 git --work-tree=/home/${user_name}/projects/blog --git-dir=/home/${user_name}/repos/blog.git checkout -f 
 EOF
 
-        chmod +x /home/${user_name}/repos/blog.git/post-receive
+        chmod +x /home/${user_name}/repos/blog.git/hooks/post-receive
     "
     echo -e "${green} ${user_name} 用户操作执行完毕"
-    chown -R git:git /home/${user_name}/repos/blog.git
+    chown -R ${user_name}:${user_name} /home/${user_name}/repos/blog.git
 
     # 账户是否可登录
     read -p "是否允许用户登录 y/n:" login_flag
