@@ -26,7 +26,7 @@ add_user(){
         exit 1
     fi
 
-    read -p "请设置一个密码:" pass
+    read -p "请设置一个密码:\n" pass
     # 设置密码
     echo $pass | sudo passwd $user_name --stdin  &>/dev/null
     if [ $? -eq 0 ];then
@@ -53,7 +53,7 @@ EOF
     chown -R ${user_name}:${user_name} /home/${user_name}/repos/blog.git
 
     # 账户是否可登录
-    read -p "是否允许用户登录 y/n:" login_flag
+    read -p "是否允许用户登录 y/n(默认n):\n" login_flag
     if [ -z $login_flag ] || [ $login_flag != "y" ]; then
         usermod -s /usr/sbin/nologin ${user_name}
     fi
