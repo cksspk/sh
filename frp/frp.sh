@@ -80,8 +80,8 @@ fi
 
 CHECK() {
     echo "check"
-    echo "$FRP_TYPE"
-    if [ -d "$INSTALL_PATH/frp" ];then
+    # echo "$FRP_TYPE"
+    if [ -f "$INSTALL_PATH/$FRP_TYPE" ];then
         echo "此位置已经安装，请选择其他位置，或使用更新命令"
         exit 0
     fi
